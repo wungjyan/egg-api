@@ -5,5 +5,6 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/zhihu/hot', controller.zhihu.index);
+  router.get('/zhihu', controller.zhihu.index);
+  router.get('/weibo', controller.weibo.index);
 };

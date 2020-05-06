@@ -16,7 +16,7 @@ class ZhihuService extends Service {
       return JSON.parse(data);
     } catch (err) {
       return {
-        msg: '获取知乎数据失败',
+        data: '获取知乎数据失败',
         error: err,
       };
     }
