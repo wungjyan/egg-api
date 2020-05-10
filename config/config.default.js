@@ -15,6 +15,8 @@ module.exports = appInfo => {
     zhihuApi: 'https://www.zhihu.com/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true',
     // 微博实时热搜
     weiboPage: 'https://s.weibo.com/top/summary?cate=realtimehot',
+    // 知乎日报
+    zhihuDaily: 'https://daily.zhihu.com/',
   };
 
   // use for cookie sign key, should change to your own and keep security
