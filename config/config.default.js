@@ -25,6 +25,28 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  // 连接 mongodb
+  config.mongoose = {
+    client: {
+      url: 'mongodb://127.0.0.1/eggdb',
+      options: {},
+    },
+  };
+
+  // 安全验证
+  config.security = {
+    csrf: false,
+  };
+
+  // 表单验证
+  config.validate = {
+  };
+
+  // jwt
+  config.jwt = {
+    secret: 'jwt12345',
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
