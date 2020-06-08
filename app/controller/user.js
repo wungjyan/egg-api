@@ -22,16 +22,24 @@ class UserController extends Controller {
   }
 
   async login() {
+    this.ctx.validate({ nickName: 'string', password: 'string' });
+    const user = await this.ctx.model.User.findOne(this.ctx.request.body);
+    if (!user) {
+      this.ctx.throw(404, '用户不存在');
+    }
+    const { _id, nickName } = user;
+    const token = jsonwebtoken.sign({ _id, nickName }, this.config.jwt.secret, { expiresIn: '7d' });
+    this.ctx.body = { success: true, data: { nickName, token } };
+  }
+
+  async logout() {
+    this.ctx.body = { data: 'success' };
+  }
+
+  async getInfo() {
     try {
-      this.ctx.validate({ nickName: 'string', password: 'string' });
-      const user = await this.ctx.model.User.findOne(this.ctx.request.body);
-      if (!user) {
-        this.ctx.body = { success: false, error: '用户不存在' };
-      } else {
-        const { _id, nickName } = user;
-        const token = jsonwebtoken.sign({ _id, nickName }, this.config.jwt.secret, { expiresIn: '7d' });
-        this.ctx.body = { data: { nickName, token } };
-      }
+      const user = this.ctx.state.user;
+      this.ctx.body = { success: true, data: { userInfo: user } };
     } catch (err) {
       this.ctx.body = { success: false, error: err };
     }

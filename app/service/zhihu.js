@@ -11,6 +11,14 @@ class ZhihuService extends Service {
     const res = await ctx.curl(config.zhihuApi, { dataType: 'json' });
     return res.data.data;
   }
+  // 知乎热榜数据过滤
+  async filterHotData(data) {
+    return data.map(item => {
+      const { id, title, type } = item.target;
+      const detail_text = item.detail_text;
+      return { id, title, type, detail_text };
+    });
+  }
   // 读取知乎热榜数据
   async getHot() {
     try {
@@ -23,7 +31,13 @@ class ZhihuService extends Service {
       };
     }
   }
-  // 请求知乎日报数据
+
+  /**
+   * 下面是关于知乎日报的，都是知乎的就放同一个文件了
+   */
+
+
+  // 请求知乎日报数据网页
   async requestDaily() {
     const { ctx, config } = this;
     const res = await ctx.curl(config.zhihuDaily, { dataType: 'text' });

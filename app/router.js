@@ -10,10 +10,12 @@ module.exports = app => {
 
   router.get('/', controller.home.index);
   // 爬虫接口
-  router.get('/zhihu/hot', jwt, controller.zhihu.index);
-  router.get('/weibo/hot', jwt, controller.weibo.index);
-  router.get('/zhihu/daily', jwt, controller.zhihu.daily);
+  router.get('/zhihu/hot', controller.zhihu.index);
+  router.get('/weibo/hot', controller.weibo.index);
+  router.get('/zhihu/daily', controller.zhihu.daily);
   // 用户接口
   router.post('/user/register', controller.user.register);
   router.post('/user/login', controller.user.login);
+  router.get('/user/info', jwt, controller.user.getInfo);
+  router.post('/user/logout', controller.user.logout);
 };

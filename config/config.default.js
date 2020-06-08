@@ -23,7 +23,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1588573999425_446';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'errorHandler' ];
 
   // 连接 mongodb
   config.mongoose = {
@@ -46,6 +46,8 @@ module.exports = appInfo => {
   config.jwt = {
     secret: 'jwt12345',
   };
+
+  config.env = 'dev';
 
   // add your user config here
   const userConfig = {
